@@ -2,22 +2,22 @@
 from math import sqrt
 
 
-def is_prime(user_input):
+def is_prime(integer):
     print "Checking if integer is prime..."
 
-    if user_input == 2:
+    if integer == 2:
         return True
 
-    elif user_input <= 1 or user_input % 2 == 0:
+    elif integer <= 1 or integer % 2 == 0:
         return False
 
     else:
-        to = sqrt(user_input)
+        to = sqrt(integer)
 
         i = 3
 
         while i <= to:
-            if user_input % i == 0:
+            if integer % i == 0:
                 return False
             i += 2
 
@@ -25,7 +25,24 @@ def is_prime(user_input):
 
 
 def find_factors(user_input):
-    print "Finding prime factors..."
+    print "Finding " + str(user_input) + "'s prime factors..."
+
+    prime_factors = []
+
+    # 2 is the lowest prime number
+    i = 2
+
+    while len(prime_factors) == 0:
+        if is_prime(int(i)):
+            number = user_input / i
+
+            if is_prime(number) and i * number == user_input:
+                prime_factors.append(i)
+                prime_factors.append(number)
+
+        i += 1
+
+        print prime_factors
 
 
 def run():
@@ -43,9 +60,9 @@ def run():
         if is_prime(int(user_input)):
             print str(user_input) + " is a prime number"
 
-            find_factors(int(user_input))
-
         else:
             print str(user_input) + " is not a prime number"
+
+            find_factors(int(user_input))
 
 run()
