@@ -2,9 +2,19 @@
 # Keep a limit to how far the program will go.
 
 import sys
+from decimal import Decimal, getcontext
 
-def GeneratePI(nth):
+# Uses BPP formula as described here http://stackoverflow.com/questions/28284996/python-pi-calculation
+def generate_pi(nth):
     print "Now generating PI to " + str(nth) + " digits"
+
+    getcontext().prec = nth + 1
+    print sum(1 / Decimal(16) ** k *
+              (Decimal(4) / (8 * k + 1) -
+               Decimal(2) / (8 * k + 4) -
+               Decimal(1) / (8 * k + 5) -
+               Decimal(1) / (8 * k + 6)) for k in range(100))
+
 
 if len(sys.argv) < 2:
     print "Less than one argument entered"
@@ -14,6 +24,8 @@ elif len(sys.argv) > 2:
 
 else:
     print "Valid number of arguments entered"
-    nth = sys.argv[1]
+    nth = int(sys.argv[1])
 
-    GeneratePI(nth)
+    pi = generate_pi(nth)
+
+    print "PI to " + str(nth) + " digits = " + str(pi)
