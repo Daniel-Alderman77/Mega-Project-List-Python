@@ -11,23 +11,25 @@ def is_prime(user_input):
 def find_factors(user_input):
     print "Finding prime factors..."
 
-if len(sys.argv) < 2:
-    print "No input found, please enter an integer as argument"
+def run():
+    user_input = raw_input("Please enter an integer: ")
 
-elif type(sys.argv[1]) != int:
-    "Input is not an integer, please enter an integer as argument"
+    try:
+        int(user_input)
 
-else:
-    print "Integer has been entered"
+    except ValueError:
+        print "Input is not an integer, please enter an integer"
 
-    user_input = int(sys.argv[1])
-
-    is_prime = is_prime(user_input)
-
-    if is_prime:
-        print str(user_input) + "is a prime number"
-
-        find_factors(user_input)
 
     else:
-        print str(user_input) + "is not a prime number"
+        print "Integer has been entered"
+
+        if is_prime(user_input):
+            print str(user_input) + " is a prime number"
+
+            find_factors(user_input)
+
+        else:
+            print str(user_input) + "is not a prime number"
+
+run()
