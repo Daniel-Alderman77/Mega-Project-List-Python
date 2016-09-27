@@ -4,16 +4,20 @@
 import sys
 from decimal import Decimal, getcontext
 
+
 # Uses BPP formula as described here http://stackoverflow.com/questions/28284996/python-pi-calculation
 def generate_pi(nth):
     print "Now generating PI to " + str(nth) + " digits"
 
     getcontext().prec = nth + 1
-    print sum(1 / Decimal(16) ** k *
+
+    pi = sum(1 / Decimal(16) ** k *
               (Decimal(4) / (8 * k + 1) -
                Decimal(2) / (8 * k + 4) -
                Decimal(1) / (8 * k + 5) -
                Decimal(1) / (8 * k + 6)) for k in range(100))
+
+    return pi
 
 
 if len(sys.argv) < 2:
